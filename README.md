@@ -2,6 +2,8 @@
 
 > Modern, minimal personal info landing page built with semantic HTML5, modern CSS variables, and lightweight JavaScript.
 
+🔗 **Live Demo:** [https://info-4ab.pages.dev](https://info-4ab.pages.dev)
+
 ## ✨ Features
 - **Bento Grid Architecture**: Structured layout inspired by modern design standards (Vercel, Apple, Linear).
 - **Dark & Light Mode**: Instant theme toggling with system preference detection and `localStorage` persistence.
