@@ -1,5 +1,4 @@
 ---
-// Hobbies.astro
 interface Hobby {
   icon: string;
   title: string;
@@ -7,48 +6,31 @@ interface Hobby {
 }
 
 const hobbies: Hobby[] = [
-  {
-    icon: "☕",
-    title: "Cà phê & Đi quán xá",
-    description: "Thích cà phê pha phin, cold brew đậm vị và luôn tìm kiếm những góc quán yên tĩnh, nhiều cây xanh ở Sài Gòn để ngồi thư giãn hoặc làm việc."
-  },
-  {
-    icon: "📸",
-    title: "Nhiếp ảnh đường phố & Màu phim",
-    description: "Thích đi dạo chụp lại những vệt nắng hoàng hôn, góc phố bình yên và những khoảnh khắc đời thường qua màu phim 35mm hoài niệm."
-  },
-  {
-    icon: "🎧",
-    title: "Âm nhạc Indie & Lofi Beats",
-    description: "Luôn có nhạc bên tai suốt ngày. Playlist ruột thường có Vũ, Chillies, Keshi, The Cassette, và những giai điệu lofi êm dịu lúc đêm muộn."
-  },
-  {
-    icon: "💻",
-    title: "Mày mò sáng tạo & UI/UX",
-    description: "Đam mê thiết kế các giao diện web mượt mà, tối giản, chăm chút từng hiệu ứng animation vi mô và khám phá các công nghệ frontend mới."
-  },
-  {
-    icon: "⌨️",
-    title: "Bàn phím cơ & Góc Setup",
-    description: "Yêu thích cảm giác gõ phím cơ êm tai, set up góc làm việc gọn gàng, ấm cúng với đèn vàng dịu nhẹ."
-  }
+  { icon: '01', title: 'Cà phê & đi quán xá', description: 'Tìm những góc yên tĩnh, nhiều cây xanh và một ly pha phin vừa đủ đậm.' },
+  { icon: '02', title: 'Nhiếp ảnh đường phố', description: 'Đi bộ thật lâu để bắt gặp vệt nắng, góc phố và màu phim 35mm.' },
+  { icon: '03', title: 'Indie & lofi beats', description: 'Một playlist luôn chạy ở phía sau những buổi tối làm việc.' },
+  { icon: '04', title: 'UI/UX & những thử nghiệm nhỏ', description: 'Chăm chút những chuyển động nhỏ để giao diện có nhịp điệu và tính cách.' },
+  { icon: '05', title: 'Bàn phím cơ & góc setup', description: 'Giữ bàn làm việc gọn, ấm và đủ yên để tập trung.' }
 ];
 ---
 
-<section class="section" id="hobbies">
-  <div class="section-header">
-    <h2 class="section-title">Things I Love · Sở Thích</h2>
+<section class="hobby-section" id="hobbies" aria-labelledby="hobbies-title">
+  <div class="section-marker">
+    <span class="section-number">04</span>
+    <span class="section-kicker">Những điều giữ mình lại</span>
   </div>
-
-  <div class="hobbies-list">
+  <div class="hobby-intro">
+    <h2 id="hobbies-title">Ngoài <em>màn hình</em></h2>
+    <p>Một vài sở thích giúp mình nạp lại năng lượng và nhìn công việc bằng con mắt khác.</p>
+  </div>
+  <ol class="hobby-list">
     {hobbies.map((item) => (
-      <div class="hobby-item">
-        <div class="hobby-icon">{item.icon}</div>
-        <div class="hobby-info">
-          <h3 class="hobby-title">{item.title}</h3>
-          <p class="hobby-desc">{item.description}</p>
-        </div>
-      </div>
+      <li class="hobby-row">
+        <span class="hobby-index">{item.icon}</span>
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
+        <span class="hobby-arrow" aria-hidden="true">↗</span>
+      </li>
     ))}
-  </div>
+  </ol>
 </section>

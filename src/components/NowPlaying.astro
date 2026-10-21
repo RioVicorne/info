@@ -1,21 +1,16 @@
 ---
-// NowPlaying.astro
 ---
 
-<div class="now-vibe-bar">
-  <div class="now-left">
-    <div class="equalizer-icon" aria-label="Audio wave">
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-    </div>
-    <div>
-      <div class="now-label">Current Vibe & Tunes</div>
-      <div class="now-track">Bước Qua Nhau — Vũ. 🎧</div>
-    </div>
+<aside class="listening-note" aria-label="Đang nghe">
+  <div class="equalizer-icon" aria-hidden="true">
+    <div class="eq-bar"></div>
+    <div class="eq-bar"></div>
+    <div class="eq-bar"></div>
+    <div class="eq-bar"></div>
   </div>
-  <div class="now-tag">
-    <span>☕ Cà phê tối & Lofi chill</span>
+  <div class="listening-copy">
+    <span class="listening-label">Đang nghe</span>
+    <span class="listening-track">Bước Qua Nhau — Vũ.</span>
   </div>
-</div>
+  <span class="listening-mood">cà phê tối / lofi</span>
+</aside>

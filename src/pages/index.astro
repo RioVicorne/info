@@ -1,5 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+// Component bảo trì tái sử dụng vĩnh viễn (KHÔNG ĐƯỢC XÓA)
+import MaintenancePoster from '../components/maintenance/MaintenancePoster.astro';
+import Toast from '../components/Toast.astro';
+
+// CHẾ ĐỘ BẢO TRÌ: ĐANG BẬT (Chỉ gỡ khi bạn yêu cầu)
+const isMaintenance = true;
+
 import Header from '../components/Header.astro';
 import ProfileHero from '../components/ProfileHero.astro';
 import NowPlaying from '../components/NowPlaying.astro';
@@ -8,19 +15,30 @@ import PhotoGallery from '../components/PhotoGallery.astro';
 import Hobbies from '../components/Hobbies.astro';
 import Connect from '../components/Connect.astro';
 import Footer from '../components/Footer.astro';
-import Toast from '../components/Toast.astro';
 ---
 
-<Layout title="Khoa Tran (@RioVicorne) — Personal Space & Bio" description="Góc nhỏ của Khoa Tran (@RioVicorne). Mày mò code, chụp ảnh dạo phố phường và yêu cà phê Sài Gòn.">
-  <Header />
-  <main>
-    <ProfileHero />
-    <NowPlaying />
-    <About />
-    <PhotoGallery />
-    <Hobbies />
-    <Connect />
-  </main>
-  <Footer />
+<Layout 
+  title="Khoa Tran — Website Đang Được Bảo Trì" 
+  description="Website của Khoa Tran (@rio_vicorne) đang được bảo trì và nâng cấp. Sẽ sớm trở lại!"
+  isMaintenance={isMaintenance}
+>
+  {isMaintenance ? (
+    <main class="maintenance-main">
+      <MaintenancePoster />
+    </main>
+  ) : (
+    <>
+      <Header />
+      <main id="main-content">
+        <ProfileHero />
+        <NowPlaying />
+        <About />
+        <PhotoGallery />
+        <Hobbies />
+        <Connect />
+      </main>
+      <Footer />
+    </>
+  )}
   <Toast />
 </Layout>

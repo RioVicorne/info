@@ -1,5 +1,4 @@
 ---
-// PhotoGallery.astro
 interface PhotoItem {
   title: string;
   location: string;
@@ -8,52 +7,34 @@ interface PhotoItem {
 }
 
 const photos: PhotoItem[] = [
-  {
-    title: "☕ Cà phê sữa đá & sáng Sài Gòn",
-    location: "District 1, Saigon",
-    src: "/images/photo-coffee.svg",
-    alt: "Saigon Coffee Moment"
-  },
-  {
-    title: "🌇 Vệt hoàng hôn Landmark 81",
-    location: "Bình Thạnh, Saigon",
-    src: "/images/photo-city.svg",
-    alt: "Saigon Sunset Skyline"
-  },
-  {
-    title: "💻 Góc setup bàn phím cơ & đêm khuya",
-    location: "My Cozy Workspace",
-    src: "/images/photo-desk.svg",
-    alt: "Late Night Workspace"
-  },
-  {
-    title: "📷 Cuộn phim 35mm & máy ảnh cũ",
-    location: "Street Snaps 35mm",
-    src: "/images/photo-film.svg",
-    alt: "Vintage 35mm Camera"
-  }
+  { title: 'Cà phê sữa đá & sáng Sài Gòn', location: 'District 1', src: '/images/photo-coffee.svg', alt: 'Minh hoạ một buổi cà phê sáng ở Sài Gòn' },
+  { title: 'Vệt hoàng hôn Landmark 81', location: 'Bình Thạnh', src: '/images/photo-city.svg', alt: 'Minh hoạ hoàng hôn và đường chân trời Sài Gòn' },
+  { title: 'Góc setup & đêm khuya', location: 'Ở nhà', src: '/images/photo-desk.svg', alt: 'Minh hoạ góc làm việc ban đêm' },
+  { title: 'Cuộn phim 35mm', location: 'Đi dạo', src: '/images/photo-film.svg', alt: 'Minh hoạ máy ảnh phim 35mm' }
 ];
 ---
 
-<section class="section" id="moments">
-  <div class="section-header">
-    <h2 class="section-title">Moments & Visuals</h2>
+<section class="visual-section" id="moments" aria-labelledby="moments-title">
+  <div class="section-heading-row">
+    <div class="section-marker">
+      <span class="section-number">03</span>
+      <span class="section-kicker">Những gì mình nhìn thấy</span>
+    </div>
+    <h2 id="moments-title">Khoảnh<br /><em>khắc</em></h2>
+    <p>Vài góc nhỏ đời thường, ghi lại bằng mắt của một người thích đi chậm.</p>
   </div>
-  <p class="prose" style="margin-bottom: 16px; font-size: 0.92rem;">
-    Vài khoảnh khắc đời thường, góc làm việc và những vệt nắng chiều mình ghi lại dọc đường.
-  </p>
 
-  <div class="gallery-grid">
-    {photos.map((photo) => (
-      <div class="photo-card">
-        <div class="photo-frame">
+  <div class="visual-grid">
+    {photos.map((photo, index) => (
+      <figure class:list={["visual-item", `visual-item-${index + 1}`]}>
+        <div class="visual-image">
           <img src={photo.src} alt={photo.alt} loading="lazy" />
         </div>
-        <div class="photo-caption">
+        <figcaption>
           <span>{photo.title}</span>
-          <span class="photo-loc">{photo.location}</span>
-        </div>
-      </div>
+          <small>{photo.location}</small>
+        </figcaption>
+      </figure>
     ))}
   </div>
 </section>

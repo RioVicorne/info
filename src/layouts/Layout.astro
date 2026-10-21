@@ -4,11 +4,13 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  isMaintenance?: boolean;
 }
 
 const {
-  title = "Khoa Tran — Creative Developer & Full-Stack Engineer",
-  description = "Personal info and portfolio of Khoa Tran. Creative Developer building high-performance web applications and thoughtful digital experiences."
+  title = 'Khoa Tran — Những ghi chú từ Sài Gòn',
+  description = 'Góc nhỏ của Khoa Tran: làm giao diện, chụp ảnh đường phố, nghe nhạc và sống chậm ở Sài Gòn.',
+  isMaintenance = false
 } = Astro.props;
 ---
 
@@ -17,37 +19,40 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content={isMaintenance ? '#080a0e' : '#151515'} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="profile" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Inline script to prevent theme flash (FOUC) -->
-    <script is:inline>
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    <script is:inline define:vars={{ isMaintenance }}>
+      if (isMaintenance) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        try {
+          localStorage.setItem('theme', 'dark');
+        } catch (e) {}
+      } else {
+        const theme = (() => {
+          if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+            return localStorage.getItem('theme');
+          }
           return 'dark';
-        }
-        return 'light';
-      })();
-      document.documentElement.setAttribute('data-theme', theme);
+        })();
+        document.documentElement.setAttribute('data-theme', theme);
+      }
     </script>
   </head>
   <body>
-    <div class="container">
-      <slot />
-    </div>
+    <a class="skip-link" href="#main-content">Bỏ qua đến nội dung</a>
+    <slot />
 
-    <!-- Main Client Script -->
     <script>
-      // Theme Toggle Handler
       const themeToggleBtn = document.getElementById('theme-toggle');
       const sunIcon = document.getElementById('sun-icon');
       const moonIcon = document.getElementById('moon-icon');
@@ -62,8 +67,7 @@ const {
         }
       }
 
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      updateIcon(currentTheme);
+      updateIcon(document.documentElement.getAttribute('data-theme') || 'dark');
 
       if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
@@ -75,18 +79,17 @@ const {
         });
       }
 
-      // Copy Email & Toast Handler
       const copyBtns = document.querySelectorAll('.js-copy-email');
       const toast = document.getElementById('toast');
-      let toastTimer: any = null;
+      let toastTimer: ReturnType<typeof setTimeout> | undefined;
 
       copyBtns.forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          e.preventDefault();
-          const email = btn.getAttribute('data-email') || 'khoatran.dev@gmail.com';
+        btn.addEventListener('click', async (event) => {
+          event.preventDefault();
+          const email = btn.getAttribute('data-email') || 'khoatran.payment@gmail.com';
           try {
             await navigator.clipboard.writeText(email);
-            showToast(`Copied ${email} to clipboard!`);
+            showToast(`Đã sao chép ${email}.`);
           } catch {
             const textarea = document.createElement('textarea');
             textarea.value = email;
@@ -94,7 +97,7 @@ const {
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            showToast(`Copied ${email} to clipboard!`);
+            showToast(`Đã sao chép ${email}.`);
           }
         });
       });
@@ -104,10 +107,8 @@ const {
         const toastMsg = toast.querySelector('.toast-msg');
         if (toastMsg) toastMsg.textContent = message;
         toast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => {
-          toast.classList.remove('show');
-        }, 2500);
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
       }
     </script>
   </body>
