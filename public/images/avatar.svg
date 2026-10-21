@@ -1,26 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3b82f6" />
-      <stop offset="50%" stop-color="#8b5cf6" />
-      <stop offset="100%" stop-color="#ec4899" />
+    <linearGradient id="warmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="60%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#334155"/>
     </linearGradient>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.25"/>
-    </filter>
+    <linearGradient id="badgeAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
   </defs>
-  <rect width="200" height="200" rx="100" fill="url(#bgGrad)"/>
-  <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="4 6"/>
+  <!-- Background rounded avatar -->
+  <rect width="200" height="200" rx="40" fill="url(#warmBg)"/>
+  <rect x="2" y="2" width="196" height="196" rx="38" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
   
-  <g filter="url(#shadow)">
-    <!-- Head -->
-    <circle cx="100" cy="74" r="28" fill="#ffffff" />
-    <!-- Shoulders / Body -->
-    <path d="M52 152 C 52 118, 72 112, 100 112 C 128 112, 148 118, 148 152 C 148 162, 138 168, 100 168 C 62 168, 52 162, 52 152 Z" fill="#ffffff" />
-    <!-- Glasses / Modern visor accent -->
-    <rect x="80" y="68" width="40" height="8" rx="4" fill="url(#bgGrad)" />
-    <!-- Code symbol badge on chest -->
-    <circle cx="100" cy="140" r="12" fill="#3b82f6" />
-    <path d="M96 137 L93 140 L96 143 M104 137 L107 140 L104 143" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Subtle circular aura -->
+  <circle cx="100" cy="100" r="70" fill="none" stroke="url(#badgeAccent)" stroke-width="2" stroke-dasharray="3 6" opacity="0.6"/>
+  
+  <!-- Modern stylized developer avatar -->
+  <g fill="#f8fafc">
+    <!-- Head with stylish beanie / cap -->
+    <path d="M 72 82 C 72 52, 128 52, 128 82 C 128 106, 72 106, 72 82 Z" fill="#f1f5f9"/>
+    <!-- Beanie brim -->
+    <rect x="68" y="58" width="64" height="16" rx="8" fill="#38bdf8"/>
+    <!-- Glasses -->
+    <rect x="74" y="80" width="22" height="14" rx="4" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+    <rect x="104" y="80" width="22" height="14" rx="4" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+    <line x1="96" y1="87" x2="104" y2="87" stroke="#0f172a" stroke-width="2.5"/>
+    <!-- Friendly smile -->
+    <path d="M 92 104 Q 100 110 108 104" stroke="#0f172a" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <!-- Hoodie / Shoulders -->
+    <path d="M 46 168 C 46 130, 68 122, 100 122 C 132 122, 154 130, 154 168 Z" fill="#1e293b" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+    <!-- Hoodie collar string -->
+    <path d="M 88 126 L 85 146 M 112 126 L 115 146" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
   </g>
+  <!-- Mini camera / creative badge -->
+  <circle cx="150" cy="150" r="18" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+  <text x="150" y="156" font-size="14" text-anchor="middle">✨</text>
 </svg>

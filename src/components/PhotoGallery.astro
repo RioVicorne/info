@@ -1,0 +1,59 @@
+---
+// PhotoGallery.astro
+interface PhotoItem {
+  title: string;
+  location: string;
+  src: string;
+  alt: string;
+}
+
+const photos: PhotoItem[] = [
+  {
+    title: "☕ Cà phê sữa đá & sáng Sài Gòn",
+    location: "District 1, Saigon",
+    src: "/images/photo-coffee.svg",
+    alt: "Saigon Coffee Moment"
+  },
+  {
+    title: "🌇 Vệt hoàng hôn Landmark 81",
+    location: "Bình Thạnh, Saigon",
+    src: "/images/photo-city.svg",
+    alt: "Saigon Sunset Skyline"
+  },
+  {
+    title: "💻 Góc setup bàn phím cơ & đêm khuya",
+    location: "My Cozy Workspace",
+    src: "/images/photo-desk.svg",
+    alt: "Late Night Workspace"
+  },
+  {
+    title: "📷 Cuộn phim 35mm & máy ảnh cũ",
+    location: "Street Snaps 35mm",
+    src: "/images/photo-film.svg",
+    alt: "Vintage 35mm Camera"
+  }
+];
+---
+
+<section class="section" id="moments">
+  <div class="section-header">
+    <h2 class="section-title">Moments & Visuals</h2>
+  </div>
+  <p class="prose" style="margin-bottom: 16px; font-size: 0.92rem;">
+    Vài khoảnh khắc đời thường, góc làm việc và những vệt nắng chiều mình ghi lại dọc đường.
+  </p>
+
+  <div class="gallery-grid">
+    {photos.map((photo) => (
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src={photo.src} alt={photo.alt} loading="lazy" />
+        </div>
+        <div class="photo-caption">
+          <span>{photo.title}</span>
+          <span class="photo-loc">{photo.location}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

@@ -3,16 +3,22 @@
 ---
 
 <header class="site-header">
-  <a href="#" class="brand">
-    <span class="brand-dot"></span>
-    <span>Khoa Tran</span>
-  </a>
-  <nav class="nav-links">
-    <a href="#about" class="nav-link">About</a>
-    <a href="#experience" class="nav-link">Experience</a>
-    <a href="#projects" class="nav-link">Projects</a>
-    <a href="#stack" class="nav-link">Stack</a>
-    <a href="#connect" class="nav-link">Connect</a>
+  <div class="brand-group">
+    <a href="#" class="brand">
+      <span class="brand-dot"></span>
+      <span>Khoa Tran</span>
+    </a>
+    <span class="saigon-clock" id="saigon-clock">Saigon 🇻🇳 · Loading time...</span>
+  </div>
+
+  <div class="header-right">
+    <nav class="nav-links">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#moments" class="nav-link">Moments</a>
+      <a href="#hobbies" class="nav-link">Hobbies</a>
+      <a href="#connect" class="nav-link">Connect</a>
+    </nav>
+
     <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark/Light Mode" title="Toggle theme">
       <!-- Sun Icon -->
       <svg id="sun-icon" viewBox="0 0 24 24" style="display: block;">
@@ -23,5 +29,29 @@
         <path d="M12.3 2a10 10 0 0 0-.19 20 10.04 10.04 0 0 0 9.95-8.99 1 1 0 0 0-1.25-1.08 8 8 0 0 1-9.6-9.6 1 1 0 0 0-1.08-1.25A10.05 10.05 0 0 0 12.3 2z"/>
       </svg>
     </button>
-  </nav>
+  </div>
 </header>
+
+<script>
+  // Realtime Saigon Local Clock
+  function updateSaigonClock() {
+    const clockEl = document.getElementById('saigon-clock');
+    if (!clockEl) return;
+    try {
+      const now = new Date();
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      };
+      const timeStr = new Intl.DateTimeFormat('en-US', options).format(now);
+      clockEl.textContent = `Saigon 🇻🇳 · ${timeStr} (GMT+7)`;
+    } catch {
+      clockEl.textContent = `Saigon 🇻🇳 (GMT+7)`;
+    }
+  }
+
+  updateSaigonClock();
+  setInterval(updateSaigonClock, 30000);
+</script>

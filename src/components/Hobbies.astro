@@ -1,0 +1,54 @@
+---
+// Hobbies.astro
+interface Hobby {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+const hobbies: Hobby[] = [
+  {
+    icon: "☕",
+    title: "Cà phê & Đi quán xá",
+    description: "Thích cà phê pha phin, cold brew đậm vị và luôn tìm kiếm những góc quán yên tĩnh, nhiều cây xanh ở Sài Gòn để ngồi thư giãn hoặc làm việc."
+  },
+  {
+    icon: "📸",
+    title: "Nhiếp ảnh đường phố & Màu phim",
+    description: "Thích đi dạo chụp lại những vệt nắng hoàng hôn, góc phố bình yên và những khoảnh khắc đời thường qua màu phim 35mm hoài niệm."
+  },
+  {
+    icon: "🎧",
+    title: "Âm nhạc Indie & Lofi Beats",
+    description: "Luôn có nhạc bên tai suốt ngày. Playlist ruột thường có Vũ, Chillies, Keshi, The Cassette, và những giai điệu lofi êm dịu lúc đêm muộn."
+  },
+  {
+    icon: "💻",
+    title: "Mày mò sáng tạo & UI/UX",
+    description: "Đam mê thiết kế các giao diện web mượt mà, tối giản, chăm chút từng hiệu ứng animation vi mô và khám phá các công nghệ frontend mới."
+  },
+  {
+    icon: "⌨️",
+    title: "Bàn phím cơ & Góc Setup",
+    description: "Yêu thích cảm giác gõ phím cơ êm tai, set up góc làm việc gọn gàng, ấm cúng với đèn vàng dịu nhẹ."
+  }
+];
+---
+
+<section class="section" id="hobbies">
+  <div class="section-header">
+    <h2 class="section-title">Things I Love · Sở Thích</h2>
+  </div>
+
+  <div class="hobbies-list">
+    {hobbies.map((item) => (
+      <div class="hobby-item">
+        <div class="hobby-icon">{item.icon}</div>
+        <div class="hobby-info">
+          <h3 class="hobby-title">{item.title}</h3>
+          <p class="hobby-desc">{item.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
