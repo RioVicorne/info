@@ -1,32 +1,47 @@
-# Khoa Tran — Personal Info & Bento Portfolio 🚀
+# Khoa Tran — Seamless Editorial Portfolio (Astro) 🚀
 
-> Modern, minimal personal info landing page built with semantic HTML5, modern CSS variables, and lightweight JavaScript.
+> Minimalist personal info and engineering portfolio built with [Astro](https://astro.build), featuring seamless editorial typography, zero card-boxes, and instant dark/light theming.
 
 🔗 **Live Demo:** [https://info-4ab.pages.dev](https://info-4ab.pages.dev)
 
 ## ✨ Features
-- **Bento Grid Architecture**: Structured layout inspired by modern design standards (Vercel, Apple, Linear).
-- **Dark & Light Mode**: Instant theme toggling with system preference detection and `localStorage` persistence.
-- **Ultra Fast (<1s)**: Zero external heavyweight dependencies; lightweight, responsive, and SEO-optimized.
-- **Micro-Interactions**: Smooth scrolling, pulsing availability status, 1-click email copy with custom toast notification.
-- **Announcement Banner**: "Coming Soon" notification for ongoing feature rollouts.
+- **Astro Component-Driven**: Modular, type-safe components (`Header`, `Hero`, `Experience`, `Projects`, `Stack`, `Connect`).
+- **Seamless Editorial Design**: Flowing typography, unboxed interactive rows, zero cards or chunky borders.
+- **Dark & Light Mode**: Instant client-side theme toggling with zero flash of unstyled content (FOUC).
+- **Fast Static Site Generation**: Compiles to pure static HTML/CSS with minimal JavaScript footprint.
+- **Micro-Interactions**: 1-click email copy with custom toast notification, smooth transitions.
 
 ## 🛠️ Tech Stack
-- **Structure**: Semantic HTML5
-- **Styling**: Modern CSS3 (Grid, Flexbox, CSS Variables, Glassmorphism)
+- **Framework**: [Astro 4](https://astro.build)
+- **Styling**: Modern CSS3 (CSS Variables, Responsive Flexbox, Smooth Transitions)
 - **Typography**: Plus Jakarta Sans & JetBrains Mono (Google Fonts)
-- **Script**: Vanilla JavaScript (ES6+)
+- **Hosting**: Cloudflare Pages via Wrangler
 
 ## 🚀 Getting Started
-To view locally:
-```bash
-# Using Python
-python3 -m http.server 3000
 
-# Or using Node.js npx
-npx serve .
+### Local Development
+```bash
+# Install dependencies
+npm install
+
+# Start local dev server (http://localhost:4321)
+npm run dev
 ```
-Then open `http://localhost:3000` in your browser.
+
+### Production Build
+```bash
+# Build static site to dist/
+npm run build
+
+# Preview build locally
+npm run preview
+```
+
+### Deploy to Cloudflare Pages
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name info --branch main
+```
 
 ## 📄 License
 MIT © [Khoa Tran](https://github.com/RioVicorne)

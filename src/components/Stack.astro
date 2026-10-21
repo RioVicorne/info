@@ -1,0 +1,41 @@
+---
+// Stack.astro
+interface StackCategory {
+  category: string;
+  items: string[];
+}
+
+const stackData: StackCategory[] = [
+  {
+    category: "Languages & Frameworks",
+    items: ["TypeScript", "JavaScript (ESNext)", "React.js", "Next.js", "Vue.js", "Node.js", "Python", "HTML5 / CSS3"]
+  },
+  {
+    category: "Database & Cloud",
+    items: ["PostgreSQL", "Redis", "Cloudflare Pages/Workers", "Docker", "Vercel", "AWS", "RESTful & GraphQL"]
+  },
+  {
+    category: "Creative & Tools",
+    items: ["Three.js / WebGL", "Tailwind CSS", "Figma", "Git / GitHub", "Vite", "Jest"]
+  }
+];
+---
+
+<section class="section" id="stack">
+  <div class="section-header">
+    <h2 class="section-title">Tech Stack</h2>
+  </div>
+  {stackData.map((group) => (
+    <div class="stack-group">
+      <div class="stack-label">{group.category}</div>
+      <p class="stack-items">
+        {group.items.map((item, idx) => (
+          <>
+            <span class="stack-item">{item}</span>
+            {idx < group.items.length - 1 && ", "}
+          </>
+        ))}
+      </p>
+    </div>
+  ))}
+</section>

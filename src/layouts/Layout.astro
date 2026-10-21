@@ -1,0 +1,114 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Khoa Tran — Creative Developer & Full-Stack Engineer",
+  description = "Personal info and portfolio of Khoa Tran. Creative Developer building high-performance web applications and thoughtful digital experiences."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="vi" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Inline script to prevent theme flash (FOUC) -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <slot />
+    </div>
+
+    <!-- Main Client Script -->
+    <script>
+      // Theme Toggle Handler
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const sunIcon = document.getElementById('sun-icon');
+      const moonIcon = document.getElementById('moon-icon');
+
+      function updateIcon(theme: string) {
+        if (theme === 'dark') {
+          if (sunIcon) (sunIcon as HTMLElement).style.display = 'block';
+          if (moonIcon) (moonIcon as HTMLElement).style.display = 'none';
+        } else {
+          if (sunIcon) (sunIcon as HTMLElement).style.display = 'none';
+          if (moonIcon) (moonIcon as HTMLElement).style.display = 'block';
+        }
+      }
+
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      updateIcon(currentTheme);
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+          const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          updateIcon(newTheme);
+        });
+      }
+
+      // Copy Email & Toast Handler
+      const copyBtns = document.querySelectorAll('.js-copy-email');
+      const toast = document.getElementById('toast');
+      let toastTimer: any = null;
+
+      copyBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const email = btn.getAttribute('data-email') || 'khoatran.dev@gmail.com';
+          try {
+            await navigator.clipboard.writeText(email);
+            showToast(`Copied ${email} to clipboard!`);
+          } catch {
+            const textarea = document.createElement('textarea');
+            textarea.value = email;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast(`Copied ${email} to clipboard!`);
+          }
+        });
+      });
+
+      function showToast(message: string) {
+        if (!toast) return;
+        const toastMsg = toast.querySelector('.toast-msg');
+        if (toastMsg) toastMsg.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+    </script>
+  </body>
+</html>
